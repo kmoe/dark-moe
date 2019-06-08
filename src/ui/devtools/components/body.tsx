@@ -2,7 +2,6 @@ import {m} from 'malevic';
 import withState, {useState} from 'malevic/state';
 import {Button} from '../../controls';
 import ThemeEngines from '../../../generators/theme-engines';
-import {DEVTOOLS_DOCS_URL} from '../../../utils/links';
 import {ExtWrapper} from '../../../definitions';
 
 interface BodyProps extends ExtWrapper {
@@ -72,11 +71,6 @@ function Body({data, actions}: BodyProps) {
                 <Button onclick={reset}>Reset</Button>
                 <Button onclick={apply}>Apply</Button>
             </div>
-            <p id="description">
-                Read about this tool <strong><a href={DEVTOOLS_DOCS_URL} target="_blank">here</a></strong>.
-                If a <strong>popular</strong> website looks incorrect
-                e-mail to <strong>DarkReaderApp@gmail.com</strong>
-            </p>
         </body>
     );
 }

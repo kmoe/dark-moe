@@ -1,15 +1,8 @@
 import {Extension} from './extension';
-import {getHelpURL} from '../utils/links';
 
 // Initialize extension
 const extension = new Extension();
 extension.start();
-
-chrome.runtime.onInstalled.addListener(({reason}) => {
-    if (reason === 'install') {
-        chrome.tabs.create({url: getHelpURL()});
-    }
-});
 
 declare const __DEBUG__: boolean;
 const DEBUG = __DEBUG__;
