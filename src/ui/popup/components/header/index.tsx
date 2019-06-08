@@ -29,7 +29,7 @@ function Header({data, actions, tab, onMoreToggleSettingsClick}: HeaderProps) {
 
     return (
         <header class="header">
-            <img class="header__logo" src="../assets/images/darkreader-type.svg" alt="Dark Reader" />
+            <h1>DARK MOE</h1>
             <div class="header__control header__site-toggle">
                 <SiteToggle
                     data={data}

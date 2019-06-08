@@ -56,8 +56,7 @@ function Body({data, actions}: BodyProps) {
     return (
         <body>
             <header>
-                <img id="logo" src="../assets/images/darkreader-type.svg" alt="Dark Reader" />
-                <h1 id="title">Developer Tools</h1>
+                <h1 id="title">Dark Moe Developer Tools</h1>
             </header>
             <h3 id="sub-title">{wrapper.header}</h3>
             <textarea
