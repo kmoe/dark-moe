@@ -27,7 +27,6 @@ export default class UserStorage {
             siteList: [],
             applyToListedOnly: false,
             changeBrowserTheme: false,
-            notifyOfNews: false,
             syncSettings: true,
             automation: '',
             time: {

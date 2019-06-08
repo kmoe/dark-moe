@@ -2,7 +2,6 @@ import ConfigManager from './config-manager';
 import DevTools from './devtools';
 import IconManager from './icon-manager';
 import Messenger from './messenger';
-import Newsmaker from './newsmaker';
 import TabManager from './tab-manager';
 import UserStorage from './user-storage';
 import {setWindowTheme, resetWindowTheme} from './window-theme';
@@ -15,7 +14,7 @@ import createCSSFilterStylesheet from '../generators/css-filter';
 import {getDynamicThemeFixesFor} from '../generators/dynamic-theme';
 import createStaticStylesheet from '../generators/static-theme';
 import {createSVGFilterStylesheet, getSVGFilterMatrixValue, getSVGReverseFilterMatrixValue} from '../generators/svg-filter';
-import {ExtensionData, FilterConfig, News, Shortcuts, UserSettings, TabInfo} from '../definitions';
+import {ExtensionData, FilterConfig, Shortcuts, UserSettings, TabInfo} from '../definitions';
 
 const AUTO_TIME_CHECK_INTERVAL = getDuration({seconds: 10});
 const CONFIG_SYNC_INTERVAL = getDuration({days: 1});
@@ -28,7 +27,6 @@ export class Extension {
     fonts: string[];
     icon: IconManager;
     messenger: Messenger;
-    news: Newsmaker;
     tabs: TabManager;
     user: UserStorage;
 
@@ -39,7 +37,6 @@ export class Extension {
         this.config = new ConfigManager();
         this.devtools = new DevTools(this.config, () => this.onSettingsChanged());
         this.messenger = new Messenger(this.getMessengerAdapter());
-        this.news = new Newsmaker((news) => this.onNewsUpdate(news));
         this.tabs = new TabManager({
             getConnectionMessage: (url, frameURL) => this.getConnectionMessage(url, frameURL),
         });
@@ -75,7 +72,6 @@ export class Extension {
         this.awaiting = null;
 
         this.startAutoTimeCheck();
-        this.news.subscribe();
         this.user.cleanup();
     }
 
@@ -100,7 +96,6 @@ export class Extension {
             setTheme: (theme) => this.setTheme(theme),
             setShortcut: ({command, shortcut}) => this.setShortcut(command, shortcut),
             toggleSitePattern: (pattern) => this.toggleSitePattern(pattern),
-            markNewsAsRead: (ids) => this.news.markAsRead(...ids),
             onPopupOpen: () => this.popupOpeningListener && this.popupOpeningListener(),
             applyDevDynamicThemeFixes: (text) => this.devtools.applyDynamicThemeFixes(text),
             resetDevDynamicThemeFixes: () => this.devtools.resetDynamicThemeFixes(),
@@ -153,21 +148,11 @@ export class Extension {
             isReady: this.ready,
             settings: this.user.settings,
             fonts: this.fonts,
-            news: this.news.latest,
             shortcuts: await this.getShortcuts(),
             devDynamicThemeFixesText: this.devtools.getDynamicThemeFixesText(),
             devInversionFixesText: this.devtools.getInversionFixesText(),
             devStaticThemesText: this.devtools.getStaticThemesText(),
         };
-    }
-
-    private onNewsUpdate(news: News[]) {
-        const unread = news.filter(({read}) => !read);
-        if (unread.length > 0 && this.user.settings.notifyOfNews) {
-            this.icon.notifyAboutReleaseNotes(unread.length);
-        } else {
-            this.icon.stopNotifyingAboutReleaseNotes();
-        }
     }
 
     private getConnectionMessage(url, frameURL) {

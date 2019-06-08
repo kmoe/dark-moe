@@ -22,7 +22,6 @@ export function getMockData(override = {}): ExtensionData {
             siteList: [],
             applyToListedOnly: false,
             changeBrowserTheme: false,
-            notifyOfNews: false,
             syncSettings: true,
             automation: '',
             time: {
@@ -38,7 +37,6 @@ export function getMockData(override = {}): ExtensionData {
             'fantasy',
             'system-ui'
         ],
-        news: [],
         shortcuts: {
             'addSite': 'Alt+Shift+A',
             'toggle': 'Alt+Shift+D'
@@ -91,9 +89,6 @@ export function createConnectorMock() {
                 data.settings.siteList.push(pattern);
             }
             listener(data);
-        },
-        markNewsAsRead(ids) {
-            //
         },
         disconnect() {
             //

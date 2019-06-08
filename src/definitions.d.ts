@@ -5,7 +5,6 @@ export interface ExtensionData {
     isReady: boolean;
     settings: UserSettings;
     fonts: string[];
-    news: News[];
     shortcuts: Shortcuts;
     devDynamicThemeFixesText: string;
     devInversionFixesText: string;
@@ -17,7 +16,6 @@ export interface ExtensionActions {
     setTheme(theme: Partial<FilterConfig>);
     setShortcut(command: string, shortcut: string);
     toggleSitePattern(pattern: string);
-    markNewsAsRead(ids: string[]);
     applyDevDynamicThemeFixes(text: string): Promise<void>;
     resetDevDynamicThemeFixes();
     applyDevInversionFixes(text: string): Promise<void>;
@@ -56,7 +54,6 @@ export interface UserSettings {
     siteList: string[];
     applyToListedOnly: boolean;
     changeBrowserTheme: boolean;
-    notifyOfNews: boolean;
     syncSettings: boolean;
     automation: string;
     time: TimeSettings;
@@ -126,12 +123,4 @@ export interface StaticTheme {
     noImage?: string[];
     invert?: string[];
     noCommon?: boolean;
-}
-
-export interface News {
-    id: string;
-    date: string;
-    url: string;
-    headline: string;
-    read?: boolean;
 }

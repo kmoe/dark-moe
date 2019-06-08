@@ -6,13 +6,12 @@ import FilterSettings from './filter-settings';
 import {Header, MoreToggleSettings} from './header';
 import Loader from './loader';
 import MoreSettings from './more-settings';
-import {News, NewsButton} from './news';
 import SiteListSettings from './site-list-settings';
 import {isFirefox} from '../../../utils/platform';
 import {getDuration} from '../../../utils/time';
 import {DONATE_URL, GITHUB_URL, PRIVACY_URL, TWITTER_URL, getHelpURL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
-import {ExtensionData, ExtensionActions, TabInfo, News as NewsObject} from '../../../definitions';
+import {ExtensionData, ExtensionActions, TabInfo} from '../../../definitions';
 
 withForms();
 
@@ -24,7 +23,6 @@ interface BodyProps {
 
 interface BodyState {
     activeTab: string;
-    newsOpen: boolean;
     moreToggleSettingsOpen: boolean;
 }
 
@@ -40,7 +38,6 @@ function openDevTools() {
 function Body(props: BodyProps) {
     const {state, setState} = useState<BodyState>({
         activeTab: 'Filter',
-        newsOpen: false,
         moreToggleSettingsOpen: false,
     });
     if (!props.data.isReady) {
@@ -49,32 +46,6 @@ function Body(props: BodyProps) {
                 <Loader complete={false} />
             </body>
         )
-    }
-
-    const unreadNews = props.data.news.filter(({read}) => !read);
-
-    function toggleNews() {
-        if (state.newsOpen && unreadNews.length > 0) {
-            props.actions.markNewsAsRead(unreadNews.map(({id}) => id));
-        }
-        setState({newsOpen: !state.newsOpen});
-    }
-
-    function onNewsOpen(...news: NewsObject[]) {
-        const unread = news.filter(({read}) => !read);
-        if (unread.length > 0) {
-            props.actions.markNewsAsRead(unread.map(({id}) => id));
-        }
-    }
-
-    let displayedNewsCount = unreadNews.length;
-    if (unreadNews.length > 0 && !props.data.settings.notifyOfNews) {
-        const latest = new Date(unreadNews[0].date);
-        const today = new Date();
-        const newsWereLongTimeAgo = latest.getTime() < today.getTime() - getDuration({days: 14});
-        if (newsWereLongTimeAgo) {
-            displayedNewsCount = 0;
-        }
     }
 
     function toggleMoreToggleSettings() {
@@ -124,18 +95,11 @@ function Body(props: BodyProps) {
                     <a class="donate-link" href={DONATE_URL} target="_blank">
                         <span class="donate-link__text">{getLocalMessage('donate')}</span>
                     </a>
-                    <NewsButton active={state.newsOpen} count={displayedNewsCount} onClick={toggleNews} />
                     <Button onclick={openDevTools} class="dev-tools-button">
                         🛠 {getLocalMessage('open_dev_tools')}
                     </Button>
                 </div>
             </footer>
-            <News
-                news={props.data.news}
-                expanded={state.newsOpen}
-                onNewsOpen={onNewsOpen}
-                onClose={toggleNews}
-            />
             <MoreToggleSettings
                 data={props.data}
                 actions={props.actions}
