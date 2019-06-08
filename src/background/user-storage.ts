@@ -17,7 +17,7 @@ export default class UserStorage {
     static async loadSettings() {
         if (!UserStorage.settings) {
             UserStorage.settings = await UserStorage.loadSettingsFromStorage();
-        }
+       }
     }
 
     private static fillDefaults(settings: UserSettings) {

@@ -8,13 +8,12 @@ import {Header, MoreToggleSettings} from './header';
 import Loader from './loader';
 import NewBody from '../body';
 import MoreSettings from './more-settings';
-import {NewsGroup, NewsButton} from './news';
 import SiteListSettings from './site-list-settings';
 import {getDuration} from '../../../utils/time';
 import {DONATE_URL, GITHUB_URL, PRIVACY_URL, TWITTER_URL, getHelpURL} from '../../../utils/links';
 import {getLocalMessage} from '../../../utils/locales';
 import {compose, openExtensionPage} from '../../utils';
-import type {ExtensionData, ExtensionActions, News as NewsObject} from '../../../definitions';
+import type {ExtensionData, ExtensionActions} from '../../../definitions';
 import {isMobile} from '../../../utils/platform';
 
 declare const __THUNDERBIRD__: boolean;
@@ -26,8 +25,6 @@ interface BodyProps {
 
 interface BodyState {
     activeTab: string;
-    newsOpen: boolean;
-    didNewsSlideIn: boolean;
     moreToggleSettingsOpen: boolean;
 }
 
@@ -39,8 +36,6 @@ function Body(props: BodyProps & {fonts: string[]}) {
     const context = getContext();
     const {state, setState} = useState<BodyState>({
         activeTab: 'Filter',
-        newsOpen: false,
-        didNewsSlideIn: false,
         moreToggleSettingsOpen: false,
     });
 
@@ -54,40 +49,6 @@ function Body(props: BodyProps & {fonts: string[]}) {
 
     if (isMobile || props.data.settings.previewNewDesign) {
         return <NewBody {...props} fonts={props.fonts}/>;
-    }
-
-    const unreadNews = props.data.news.filter(({read}) => !read);
-    const latestNews = props.data.news.length > 0 ? props.data.news[0] : null;
-    const isFirstNewsUnread = latestNews && !latestNews.read;
-
-    context.onRender(() => {
-        if (props.data.settings.fetchNews && isFirstNewsUnread && !state.newsOpen && !state.didNewsSlideIn) {
-            setTimeout(toggleNews, 750);
-        }
-    });
-
-    function toggleNews() {
-        if (state.newsOpen && unreadNews.length > 0) {
-            props.actions.markNewsAsRead(unreadNews.map(({id}) => id));
-        }
-        setState({newsOpen: !state.newsOpen, didNewsSlideIn: state.didNewsSlideIn || !state.newsOpen});
-    }
-
-    function onNewsOpen(...news: NewsObject[]) {
-        const unread = news.filter(({read}) => !read);
-        if (unread.length > 0) {
-            props.actions.markNewsAsRead(unread.map(({id}) => id));
-        }
-    }
-
-    let displayedNewsCount = unreadNews.length;
-    if (unreadNews.length > 0) {
-        const latest = new Date(unreadNews[0].date);
-        const today = new Date();
-        const newsWereLongTimeAgo = latest.getTime() < today.getTime() - getDuration({days: 14});
-        if (newsWereLongTimeAgo) {
-            displayedNewsCount = 0;
-        }
     }
 
     function toggleMoreToggleSettings() {
@@ -143,18 +104,11 @@ function Body(props: BodyProps & {fonts: string[]}) {
                     <a class="donate-link" href={DONATE_URL} target="_blank" rel="noopener noreferrer">
                         <span class="donate-link__text">{getLocalMessage('donate')}</span>
                     </a>
-                    <NewsButton active={state.newsOpen} count={displayedNewsCount} onClick={toggleNews} />
                     <Button onclick={openDevTools} class="dev-tools-button">
                         🛠 {getLocalMessage('open_dev_tools')}
                     </Button>
                 </div>
             </footer>
-            <NewsGroup
-                news={props.data.news}
-                expanded={state.newsOpen}
-                onNewsOpen={onNewsOpen}
-                onClose={toggleNews}
-            />
             <MoreToggleSettings
                 data={props.data}
                 actions={props.actions}

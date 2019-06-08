@@ -8,8 +8,6 @@ export interface ExtensionAdapter {
     changeSettings: (settings: Partial<UserSettings>) => void;
     setTheme: (theme: Partial<FilterConfig>) => void;
     setShortcut: ({command, shortcut}: {command: string; shortcut: string}) => void;
-    markNewsAsRead: (ids: string[]) => Promise<void>;
-    markNewsAsDisplayed: (ids: string[]) => Promise<void>;
     toggleActiveTab: () => void;
     loadConfig: (options: {local: boolean}) => Promise<void>;
     applyDevDynamicThemeFixes: (json: string) => Error;
@@ -29,7 +27,6 @@ export default class Messenger {
         this.changeListenerCount = 0;
 
         chrome.runtime.onMessage.addListener((message, sender, sendResponse) => this.messageListener(message, sender, sendResponse));
-
         // This is a work-around for Firefox bug which does not permit responding to onMessage handler above.
         if (isFirefox) {
             chrome.runtime.onConnect.addListener((port) => this.firefoxPortListener(port));
@@ -117,12 +114,6 @@ export default class Messenger {
                 break;
             case MessageType.UI_TOGGLE_ACTIVE_TAB:
                 this.adapter.toggleActiveTab();
-                break;
-            case MessageType.UI_MARK_NEWS_AS_READ:
-                this.adapter.markNewsAsRead(data);
-                break;
-            case MessageType.UI_MARK_NEWS_AS_DISPLAYED:
-                this.adapter.markNewsAsDisplayed(data);
                 break;
             case MessageType.UI_LOAD_CONFIG:
                 this.adapter.loadConfig(data);

@@ -8,7 +8,6 @@ export function getMockData(override = {} as Partial<ExtensionData>): ExtensionD
         isAllowedFileSchemeAccess: false,
         settings: {
             enabled: true,
-            fetchNews: true,
             presets: [],
             theme: {
                 mode: 1,
@@ -56,7 +55,6 @@ export function getMockData(override = {} as Partial<ExtensionData>): ExtensionD
             'fantasy',
             'system-ui'
         ],
-        news: [],
         shortcuts: {
             'addSite': 'Alt+Shift+A',
             'toggle': 'Alt+Shift+D'

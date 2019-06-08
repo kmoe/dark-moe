@@ -54,7 +54,6 @@ test('Settings Validation', () => {
 
     const wonkySet = {
         enabled: '',
-        fetchNews: null as boolean,
         theme: {
             mode: 'dark',
             brightness: 250,
@@ -149,7 +148,6 @@ test('Settings Validation', () => {
 
     const validSet: UserSettings = {
         enabled: true,
-        fetchNews: true,
         theme: {
             mode: 0,
             brightness: 125,

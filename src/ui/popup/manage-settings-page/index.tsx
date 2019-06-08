@@ -8,7 +8,6 @@ import ExportTheme from './export-theme';
 import {isURLInList} from '../../../utils/url';
 import {ThemeEngine} from '../../../generators/theme-engines';
 import SyncConfigButton from './sync-config';
-import FetchNews from './fetch-news';
 
 export default function ManageSettingsPage(props: ViewProps) {
     const custom = props.data.settings.customThemes.find(
@@ -22,7 +21,6 @@ export default function ManageSettingsPage(props: ViewProps) {
         <section class="m-section">
             <SyncSettings {...props} />
             <SyncConfigButton {...props} />
-            <FetchNews {...props} />
             <ImportButton {...props} />
             <ExportButton {...props} />
             {engine === ThemeEngine.dynamicTheme ? <ExportTheme /> : null}

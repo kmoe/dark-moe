@@ -3,7 +3,6 @@ import DevTools from './devtools';
 import IconManager from './icon-manager';
 import type {ExtensionAdapter} from './messenger';
 import Messenger from './messenger';
-import Newsmaker from './newsmaker';
 import TabManager from './tab-manager';
 import UserStorage from './user-storage';
 import {setWindowTheme, resetWindowTheme} from './window-theme';
@@ -72,7 +71,6 @@ export class Extension {
         }
         this.initialized = true;
 
-        new Newsmaker();
         DevTools.init(async () => this.onSettingsChanged());
         Messenger.init(this.getMessengerAdapter());
         TabManager.init({
@@ -103,7 +101,7 @@ export class Extension {
                 if (!permissions?.permissions?.includes('contextMenus')) {
                     this.registeredContextMenus = false;
                 }
-            });
+               });
         }
     }
 
@@ -229,7 +227,6 @@ export class Extension {
             TabManager.updateContentScript({runOnProtectedPages: UserStorage.settings.enableForProtectedPages});
         }
 
-        UserStorage.settings.fetchNews && Newsmaker.subscribe();
         this.startBarrier.resolve();
     }
 
@@ -242,8 +239,6 @@ export class Extension {
             setTheme: (theme) => this.setTheme(theme),
             setShortcut: ({command, shortcut}) => this.setShortcut(command, shortcut),
             toggleActiveTab: async () => this.toggleActiveTab(),
-            markNewsAsRead: async (ids) => await Newsmaker.markAsRead(...ids),
-            markNewsAsDisplayed: async (ids) => await Newsmaker.markAsDisplayed(...ids),
             loadConfig: async (options) => await ConfigManager.load(options),
             applyDevDynamicThemeFixes: (text) => DevTools.applyDynamicThemeFixes(text),
             resetDevDynamicThemeFixes: () => DevTools.resetDynamicThemeFixes(),
@@ -363,7 +358,6 @@ export class Extension {
     static async collectData(): Promise<ExtensionData> {
         await this.loadData();
         const [
-            news,
             shortcuts,
             dynamicFixesText,
             filterFixesText,
@@ -371,7 +365,6 @@ export class Extension {
             activeTab,
             isAllowedFileSchemeAccess,
         ] = await Promise.all([
-            Newsmaker.getLatest(),
             this.getShortcuts(),
             DevTools.getDynamicThemeFixesText(),
             DevTools.getInversionFixesText(),
@@ -384,7 +377,6 @@ export class Extension {
             isReady: true,
             isAllowedFileSchemeAccess,
             settings: UserStorage.settings,
-            news,
             shortcuts,
             colorScheme: ConfigManager.COLOR_SCHEMES_RAW,
             forcedScheme: this.autoState === 'scheme-dark' ? 'dark' : this.autoState === 'scheme-light' ? 'light' : null,
@@ -482,9 +474,6 @@ export class Extension {
             } else {
                 resetWindowTheme();
             }
-        }
-        if (prev.fetchNews !== UserStorage.settings.fetchNews) {
-            UserStorage.settings.fetchNews ? Newsmaker.subscribe() : Newsmaker.unSubscribe();
         }
 
         if (prev.enableContextMenus !== UserStorage.settings.enableContextMenus) {

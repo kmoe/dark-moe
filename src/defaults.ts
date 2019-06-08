@@ -55,7 +55,6 @@ export const DEFAULT_COLORSCHEME: ParsedColorSchemeConfig = {
 
 export const DEFAULT_SETTINGS: UserSettings = {
     enabled: true,
-    fetchNews: true,
     theme: DEFAULT_THEME,
     presets: [],
     customThemes: [],

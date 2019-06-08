@@ -98,7 +98,6 @@ export function validateSettings(settings: Partial<UserSettings>) {
     };
 
     validateProperty(settings, 'enabled', isBoolean, DEFAULT_SETTINGS);
-    validateProperty(settings, 'fetchNews', isBoolean, DEFAULT_SETTINGS);
 
     validateProperty(settings, 'theme', isPlainObject, DEFAULT_SETTINGS);
     const {errors: themeErrors} = validateTheme(settings.theme);
