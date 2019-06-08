@@ -66,7 +66,6 @@ export default function Body({data, actions}: ExtWrapper) {
     return (
         <body>
             <header>
-                <img id="logo" src="../assets/images/darkreader-type.svg" alt="Dark Reader" />
                 <h1 id="title">CSS Editor</h1>
             </header>
             <h3 id="sub-title">{custom ? host : 'All websites'}</h3>

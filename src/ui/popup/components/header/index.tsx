@@ -39,9 +39,7 @@ function Header({data, actions, onMoreToggleSettingsClick}: HeaderProps) {
 
     return (
         <header class="header">
-            <a class="header__logo" href={HOMEPAGE_URL} target="_blank" rel="noopener noreferrer">
-                Dark Reader
-            </a>
+            <h1>DARK MOE</h1>
             <div class="header__control header__site-toggle">
                 <SiteToggle
                     data={data}
