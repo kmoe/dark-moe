@@ -51,10 +51,11 @@ type TestMessage = {
 // Start extension
 const extension = Extension.start();
 
-const welcome = `  /''''\\
- (0)==(0)
-/__||||__\\
-Welcome to Dark Reader!`;
+const welcome = `
+ /\_/\
+( o.o )
+ > ^ <
+Welcome to Dark Moe!`;
 console.log(welcome);
 
 declare const __DEBUG__: boolean;
