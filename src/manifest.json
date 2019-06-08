@@ -1,8 +1,8 @@
 {
     "manifest_version": 2,
     "name": "Dark Moe",
-    "version": "4.7.12",
-    "author": "Alexander Shutov",
+    "version": "0.1.0",
+    "author": "Alexander Shutov, fork by Katy Moe",
     "description": "__MSG_extension_description__",
     "default_locale": "en",
     "browser_action": {
