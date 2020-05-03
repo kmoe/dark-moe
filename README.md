@@ -8,6 +8,8 @@ This extension is a fork of [Dark Reader](https://github.com/darkreader/darkread
 
 This fork is not distributed on the Chrome Web Store; it is shared in the spirit of FOSS and for educational purposes. I recommend that if you want up-to-date themes, bug fixes, and features, you use and contribute to [Dark Reader](https://github.com/darkreader/darkreader) itself.
 
+![glitch doge](src/icons/dr_128.png)
+
 ## Development
 
 ```bash
