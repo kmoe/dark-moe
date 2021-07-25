@@ -3,6 +3,8 @@
 build/
 darkreader.js
 debug.log
+debug
+debug-firefox
 
 # Node.js modules
 #-----------------------------------

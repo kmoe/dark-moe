@@ -1,0 +1,140 @@
+{
+    "extension_description": {
+        "message": "Donkere modus voor elke website. Zorg goed voor je ogen, gebruik donkere modus voor gebruik in de nacht of zelfs overdag."
+    },
+    "loading_please_wait": {
+        "message": "Laden, even geduld alstublieft."
+    },
+    "on": {
+        "message": "Aan"
+    },
+    "off": {
+        "message": "Uit"
+    },
+    "toggle_current_site": {
+        "message": "Modus voor huidige site omschakelen"
+    },
+    "setup_hotkey_toggle_site": {
+        "message": "Sneltoets schakelen\nhuidige site instellen"
+    },
+    "toggle_extension": {
+        "message": "Ext. in of uit schakelen"
+    },
+    "setup_hotkey_toggle_extension": {
+        "message": "Sneltoets instellen\nextensie in of uit schakelen"
+    },
+    "time_settings": {
+        "message": "Tijd instellingen"
+    },
+    "set_active_hours": {
+        "message": "Actieve uren instellen"
+    },
+    "page_protected": {
+        "message": "Deze pagina is beschermd\ndoor de browser"
+    },
+    "page_in_dark_list": {
+        "message": "Deze site staat op\nde globale lijst"
+    },
+    "filter": {
+        "message": "Filter"
+    },
+    "mode": {
+        "message": "Modus"
+    },
+    "dark": {
+        "message": "Donker"
+    },
+    "light": {
+        "message": "Licht"
+    },
+    "brightness": {
+        "message": "Helderheid"
+    },
+    "contrast": {
+        "message": "Contrast"
+    },
+    "grayscale": {
+        "message": "Grijstinten"
+    },
+    "sepia": {
+        "message": "Sepia"
+    },
+    "only_for": {
+        "message": "Alleen voor"
+    },
+    "only_for_description": {
+        "message": "Instelling voor alleen deze site opslaan"
+    },
+    "site_list": {
+        "message": "Site lijst"
+    },
+    "invert_listed_only": {
+        "message": "Alleen omgek. lijst"
+    },
+    "not_invert_listed": {
+        "message": "Niet omgek. lijst"
+    },
+    "add_site_to_list": {
+        "message": "Site aan lijst toevoegen"
+    },
+    "setup_add_site_hotkey": {
+        "message": "Sneltoets instellen om site aan lijst toe te vogen"
+    },
+    "more": {
+        "message": "Meer"
+    },
+    "select_font": {
+        "message": "Selecteer een lettertype"
+    },
+    "text_stroke": {
+        "message": "Tekst omlijning"
+    },
+    "try_experimental_theme_engines": {
+        "message": "Probeer **experimentele** themas\n**Filter+** behoudt saturatie kleuren, videokaart benodigd\n**Statisch thema** Genereert snel een simpel thema\n**Dynamisch thema** analyseerd kleuren en foto's"
+    },
+    "engine_filter": {
+        "message": "Filter"
+    },
+    "engine_filter_plus": {
+        "message": "Filter+"
+    },
+    "engine_static": {
+        "message": "Statisch"
+    },
+    "engine_dynamic": {
+        "message": "Dynam."
+    },
+    "theme_generation_mode": {
+        "message": "Thema generatie modus"
+    },
+    "custom_browser_theme_on": {
+        "message": "Aangepast"
+    },
+    "custom_browser_theme_off": {
+        "message": "Standaard"
+    },
+    "change_browser_theme": {
+        "message": "Browser thema veranderen"
+    },
+    "privacy": {
+        "message": "Privacy"
+    },
+    "help": {
+        "message": "Hulp"
+    },
+    "donate": {
+        "message": "Doneren"
+    },
+    "news": {
+        "message": "Nieuws"
+    },
+    "read_more": {
+        "message": "Lees meer"
+    },
+    "open_dev_tools": {
+        "message": "Tools"
+    },
+    "store_listing": {
+        "message": "Deze oog zorg extensie heeft een nachtstand mogelijkheid waarbij het maken van donkere themas zeer gemakkelijk is. Donkere modus keert lichte kleuren om, zo heb je een makkelijk te lezen hoog contrast.\n\nJe kunt de helderheid, het contrast, een sepia filter, donkere modus, lettertype en een lijst van te negeren websites geheel instellen naar wens.\n\nDark Reader laat nooit advertenties zien en gebruikt nooit je data. Deze extensie is volledig open-source op https://github.com/darkreader/darkreader\n\nVoor de installatie is het aangeraden soortgelijke extensies eerst uit te schakelen. Veel kijkplezier!"
+    }
+}
