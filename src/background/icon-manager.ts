@@ -11,11 +11,11 @@ export default class IconManager {
     }
 
     setActive() {
-        if (!chrome.browserAction.setIcon) {
+        if (!chrome.action.setIcon) {
             // Fix for Firefox Android
             return;
         }
-        chrome.browserAction.setIcon({
+        chrome.action.setIcon({
             path: {
                 '19': ICON_PATHS.active_19,
                 '38': ICON_PATHS.active_38
@@ -24,11 +24,11 @@ export default class IconManager {
     }
 
     setInactive() {
-        if (!chrome.browserAction.setIcon) {
+        if (!chrome.action.setIcon) {
             // Fix for Firefox Android
             return;
         }
-        chrome.browserAction.setIcon({
+        chrome.action.setIcon({
             path: {
                 '19': ICON_PATHS.inactive_19,
                 '38': ICON_PATHS.inactive_38
@@ -37,16 +37,16 @@ export default class IconManager {
     }
 
     notifyAboutReleaseNotes(count: number) {
-        chrome.browserAction.setBadgeBackgroundColor({
+        chrome.action.setBadgeBackgroundColor({
             color: '#e96c4c',
         });
-        chrome.browserAction.setBadgeText({
+        chrome.action.setBadgeText({
             text: String(count)
         });
     }
 
     stopNotifyingAboutReleaseNotes() {
-        chrome.browserAction.setBadgeText({
+        chrome.action.setBadgeText({
             text: ''
         });
     }

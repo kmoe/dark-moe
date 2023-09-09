@@ -1,7 +1,7 @@
 {
-    "applications": {
+    "browser_specific_settings": {
         "gecko": {
-            "id": "addon@darkreader.org",
+            "id": "addon@darkmoe.net",
             "strict_min_version": "54.0"
         }
     },
@@ -11,7 +11,9 @@
     "permissions": [
         "storage",
         "tabs",
-        "theme",
+        "theme"
+    ],
+    "host_permissions": [
         "<all_urls>"
     ]
 }

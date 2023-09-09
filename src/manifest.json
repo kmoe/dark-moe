@@ -1,11 +1,11 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Dark Moe",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "author": "Alexander Shutov, fork by Katy Moe",
     "description": "__MSG_extension_description__",
     "default_locale": "en",
-    "browser_action": {
+    "action": {
         "default_title": "Dark Moe",
         "default_icon": {
             "38": "icons/dr_active_38.png",
@@ -38,7 +38,9 @@
     "permissions": [
         "fontSettings",
         "storage",
-        "tabs",
+        "tabs"
+    ],
+    "host_permissions": [
         "<all_urls>"
     ],
     "commands": {
