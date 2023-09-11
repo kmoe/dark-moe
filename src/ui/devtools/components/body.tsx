@@ -1,5 +1,5 @@
 import {m} from 'malevic';
-import withState, {useState} from 'malevic/state';
+import {withState, useState} from 'malevic/state';
 import {Button} from '../../controls';
 import ThemeEngines from '../../../generators/theme-engines';
 import {ExtWrapper} from '../../../definitions';
@@ -8,28 +8,28 @@ interface BodyProps extends ExtWrapper {
 }
 
 function Body({data, actions}: BodyProps) {
-    const {state, setState} = useState({errorText: null as string})
+    const {state, setState} = useState({errorText: "" as string})
     let textNode: HTMLTextAreaElement;
 
     const wrapper = (data.settings.theme.engine === ThemeEngines.staticTheme
         ? {
             header: 'Static Theme Editor',
             fixesText: data.devStaticThemesText,
-            apply: (text) => actions.applyDevStaticThemes(text),
+            apply: (text: string) => actions.applyDevStaticThemes(text),
             reset: () => actions.resetDevStaticThemes(),
         } : data.settings.theme.engine === ThemeEngines.cssFilter || data.settings.theme.engine === ThemeEngines.svgFilter ? {
             header: 'Inversion Fix Editor',
             fixesText: data.devInversionFixesText,
-            apply: (text) => actions.applyDevInversionFixes(text),
+            apply: (text: string) => actions.applyDevInversionFixes(text),
             reset: () => actions.resetDevInversionFixes(),
         } : {
                 header: 'Dynamic Theme Editor',
                 fixesText: data.devDynamicThemeFixesText,
-                apply: (text) => actions.applyDevDynamicThemeFixes(text),
+                apply: (text: string) => actions.applyDevDynamicThemeFixes(text),
                 reset: () => actions.resetDevDynamicThemeFixes(),
             });
 
-    function onTextRender(node) {
+    function onTextRender(node: HTMLTextAreaElement) {
         textNode = node;
         if (!state.errorText) {
             textNode.value = wrapper.fixesText;
@@ -40,7 +40,7 @@ function Body({data, actions}: BodyProps) {
         const text = textNode.value;
         try {
             await wrapper.apply(text);
-            setState({errorText: null});
+            setState({errorText: ""});
         } catch (err) {
             setState({
                 errorText: String(err),
@@ -50,7 +50,7 @@ function Body({data, actions}: BodyProps) {
 
     function reset() {
         wrapper.reset();
-        setState({errorText: null});
+        setState({errorText: ""});
     }
 
     return (

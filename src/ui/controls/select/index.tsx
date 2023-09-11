@@ -1,5 +1,5 @@
 import {m, getData} from 'malevic';
-import withState, {useState} from 'malevic/state';
+import {withState, useState} from 'malevic/state';
 import Button from '../button';
 import TextBox from '../textbox';
 import VirtualScroll from '../virtual-scroll';

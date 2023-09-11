@@ -1,6 +1,6 @@
 import {m} from 'malevic';
-import withForms from 'malevic/forms';
-import withState, {useState} from 'malevic/state';
+import {withForms} from 'malevic/forms';
+import {withState, useState} from 'malevic/state';
 import {TabPanel, Button} from '../../controls';
 import FilterSettings from './filter-settings';
 import {Header, MoreToggleSettings} from './header';
@@ -8,7 +8,6 @@ import Loader from './loader';
 import MoreSettings from './more-settings';
 import SiteListSettings from './site-list-settings';
 import {isFirefox} from '../../../utils/platform';
-import {getDuration} from '../../../utils/time';
 import {getLocalMessage} from '../../../utils/locales';
 import {ExtensionData, ExtensionActions, TabInfo} from '../../../definitions';
 
