@@ -20,12 +20,12 @@ interface SelectState {
 const valueNodes = new WeakMap<Element, Map<string, Element>>();
 
 function Select(props: SelectProps) {
-    const {state, setState} = useState<SelectState>({isExpanded: false, focusedIndex: null});
+    const {state, setState} = useState<SelectState>({isExpanded: false, focusedIndex: 0});
     const values = Object.keys(props.options);
 
     let rootNode: Element;
 
-    function onRender(node) {
+    function onRender(node: any) {
         rootNode = node;
         if (!valueNodes.has(rootNode)) {
             valueNodes.set(rootNode, new Map());
@@ -91,7 +91,9 @@ function Select(props: SelectProps) {
     function onSelectOption(e: MouseEvent) {
         let current = e.target as HTMLElement;
         while (current && !current.matches('.select__option')) {
-            current = current.parentElement;
+            if (current.parentElement != null) {
+              current = current.parentElement;
+            }
         }
 
         if (current) {
@@ -102,12 +104,12 @@ function Select(props: SelectProps) {
         collapseList();
     }
 
-    function saveValueNode(value, domNode) {
-        valueNodes.get(rootNode).set(value, domNode);
+    function saveValueNode(value: any, domNode: any) {
+        valueNodes.get(rootNode)?.set(value, domNode);
     }
 
-    function removeValueNode(value) {
-        valueNodes.get(rootNode).delete(value);
+    function removeValueNode(value: any) {
+        valueNodes.get(rootNode)?.delete(value);
     }
 
     return (

@@ -43,14 +43,24 @@ export default function TimeRangePicker(props: TimePickerProps) {
         props.onChange([props.startTime, to24HTime($endTime)])
     }
 
+    function setValToStartTime(node: Element) {
+        var nodeEl = node as HTMLInputElement
+        nodeEl.value = toLocaleTime(props.startTime)
+    }
+
+    function setValToEndTime(node: Element) {
+        var nodeEl = node as HTMLInputElement
+        nodeEl.value = toLocaleTime(props.endTime)
+    }
+
     return (
         <span class="time-range-picker">
             <TextBox
                 class="time-range-picker__input time-range-picker__input--start"
                 placeholder={toLocaleTime('18:00')}
-                didmount={(node: HTMLInputElement) => node.value = toLocaleTime(props.startTime)}
-                didupdate={(node: HTMLInputElement) => node.value = toLocaleTime(props.startTime)}
-                onchange={(e) => onStartTimeChange((e.target as HTMLInputElement).value)}
+                didmount={setValToStartTime}
+                didupdate={setValToStartTime}
+                onchange={(e: any) => onStartTimeChange((e.target as HTMLInputElement).value)}
                 onkeypress={(e) => {
                     if (e.key === 'Enter') {
                         const input = e.target as HTMLInputElement;
@@ -63,9 +73,9 @@ export default function TimeRangePicker(props: TimePickerProps) {
             <TextBox
                 class="time-range-picker__input time-range-picker__input--end"
                 placeholder={toLocaleTime('9:00')}
-                didmount={(node: HTMLInputElement) => node.value = toLocaleTime(props.endTime)}
-                didupdate={(node: HTMLInputElement) => node.value = toLocaleTime(props.endTime)}
-                onchange={(e) => onEndTimeChange((e.target as HTMLInputElement).value)}
+                didmount={setValToEndTime}
+                didupdate={setValToEndTime}
+                onchange={(e: any) => onEndTimeChange((e.target as HTMLInputElement).value)}
                 onkeypress={(e) => {
                     if (e.key === 'Enter') {
                         const input = e.target as HTMLInputElement;

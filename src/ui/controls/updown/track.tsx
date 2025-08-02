@@ -3,7 +3,7 @@ import {m} from 'malevic';
 interface TrackProps {
     value: number;
     label: string;
-    onChange?: (value: number) => void;
+    onChange: (value: number) => void;
 }
 
 export default function Track(props: TrackProps) {
@@ -63,7 +63,7 @@ export default function Track(props: TrackProps) {
                 'track': true,
                 'track--clickable': Boolean(props.onChange),
             }}
-            onmousedown={isClickable ? onMouseDown : null}
+            onmousedown={isClickable ? onMouseDown : undefined}
         >
             <span class="track__value" style={valueStyle}></span>
             <label class="track__label">

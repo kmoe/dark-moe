@@ -1,6 +1,10 @@
 import {m} from 'malevic';
 
-export default function Tab({isActive}, ...children) {
+interface whatever {
+    isActive: boolean;
+}
+
+export default function Tab({isActive}: whatever, ...children: any) {
 
     const tabCls = {
         'tab-panel__tab': true,

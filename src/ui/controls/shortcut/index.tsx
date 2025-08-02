@@ -37,7 +37,7 @@ export default function ShortcutLink(props: ShortcutLinkProps) {
             const command = e.metaKey;
             const shift = e.shiftKey;
 
-            let key: string = null;
+            let key: string = "";
             if (e.code.startsWith('Key')) {
                 key = e.code.substring(3);
             } else if (e.code.startsWith('Digit')) {

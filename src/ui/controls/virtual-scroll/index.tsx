@@ -13,8 +13,8 @@ export default function VirtualScroll(props: VirtualScrollProps) {
         return props.root;
     }
 
-    function renderContent(root: Element, scrollToIndex: number) {
-        let itemHeight: number;
+    function renderContent(root: Element, scrollToIndex: number | undefined) {
+        let itemHeight: number | undefined;
         if (elementsHeights.has(root)) {
             itemHeight = elementsHeights.get(root);
         } else {
@@ -36,7 +36,7 @@ export default function VirtualScroll(props: VirtualScrollProps) {
                 data={VirtualScroll}
                 style={{
                     'flex': 'none',
-                    'height': `${props.items.length * itemHeight}px`,
+                    'height': `${props.items.length * itemHeight!}px`,
                     'overflow': 'hidden',
                     'position': 'relative',
                 }}
@@ -44,8 +44,8 @@ export default function VirtualScroll(props: VirtualScrollProps) {
             />
         ));
 
-        if (scrollToIndex >= 0) {
-            root.scrollTop = scrollToIndex * itemHeight;
+        if (scrollToIndex! >= 0) {
+            root.scrollTop = scrollToIndex! * itemHeight!;
         }
         const containerHeight = document.documentElement.clientHeight - root.getBoundingClientRect().top; // Use this height as a fix for animated height
 
@@ -53,7 +53,7 @@ export default function VirtualScroll(props: VirtualScrollProps) {
         let focusedIndex = -1;
         if (document.activeElement) {
             let current = document.activeElement;
-            while (current && current.parentElement !== wrapper) {
+            while (current && current.parentElement !== wrapper && current.parentElement != null) {
                 current = current.parentElement;
             }
             if (current) {
@@ -66,8 +66,8 @@ export default function VirtualScroll(props: VirtualScrollProps) {
                 return {item, index};
             })
             .filter(({index}) => {
-                const eTop = index * itemHeight;
-                const eBottom = (index + 1) * itemHeight;
+                const eTop = index * itemHeight!;
+                const eBottom = (index + 1) * itemHeight!;
                 const rTop = root.scrollTop;
                 const rBottom = root.scrollTop + containerHeight;
                 const isTopBoundVisible = eTop >= rTop && eTop <= rBottom;
@@ -80,7 +80,7 @@ export default function VirtualScroll(props: VirtualScrollProps) {
                     style={{
                         'left': '0',
                         'position': 'absolute',
-                        'top': `${index * itemHeight}px`,
+                        'top': `${index * itemHeight!}px`,
                         'width': '100%',
                     }}
                 >
@@ -100,15 +100,15 @@ export default function VirtualScroll(props: VirtualScrollProps) {
         ...props.root,
         attrs: {
             ...props.root.attrs,
-            didmount: (node) => {
+            didmount: (node: any) => {
                 rootNode = node;
                 rootDidMount && rootDidMount(rootNode);
-                renderContent(rootNode, isNaN(props.scrollToIndex) ? -1 : props.scrollToIndex);
+                renderContent(rootNode, isNaN(props.scrollToIndex!) ? -1 : props.scrollToIndex);
             },
-            didupdate: (node) => {
+            didupdate: (node: any) => {
                 rootNode = node;
                 rootDidUpdate && rootDidUpdate(rootNode);
-                renderContent(rootNode, isNaN(props.scrollToIndex) ? -1 : props.scrollToIndex);
+                renderContent(rootNode, isNaN(props.scrollToIndex!) ? -1 : props.scrollToIndex);
             },
             onscroll: () => {
                 if (rootNode.scrollTop === prevScrollTop) {

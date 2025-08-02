@@ -13,7 +13,7 @@ interface TextListProps {
 const propsStore = new WeakMap<Element, TextListProps>();
 
 export default function TextList(props: TextListProps) {
-    function onTextChange(e) {
+    function onTextChange(e: any) {
         const index = getData(e.target);
         const values = props.values.slice();
         const value = e.target.value.trim();
